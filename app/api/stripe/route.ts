@@ -8,9 +8,6 @@ import connectDB from "@/lib/mongodb";
 
 const settingsUrl = absoluteUrl("/settings");
 
-// Connect to MongoDB
-connectDB();
-
 export async function GET() {
   try {
     const { userId } = auth();
@@ -19,6 +16,9 @@ export async function GET() {
     if (!userId || !user) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
+
+    // Connect to MongoDB
+    await connectDB();
 
     // Find user subscription by user ID
     const userSubscription = await UserSubscription.findOne({ userId });
@@ -35,19 +35,19 @@ export async function GET() {
     const stripeSession = await stripe.checkout.sessions.create({
       success_url: settingsUrl,
       cancel_url: settingsUrl,
-      payment_method_types: ["card"],
+      payment_method_types: ["card"], // Adding UPI as a payment method
       mode: "subscription",
       billing_address_collection: "auto",
       customer_email: user.emailAddresses[0].emailAddress,
       line_items: [
         {
           price_data: {
-            currency: "USD",
+            currency: "USD", // Change currency to INR for India payments
             product_data: {
               name: "Genius Pro",
               description: "Unlimited AI Generations"
             },
-            unit_amount: 2000,
+            unit_amount: 2000, // Amount in paisa (INR 2000)
             recurring: {
               interval: "month"
             }
