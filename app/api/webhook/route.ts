@@ -4,8 +4,12 @@ import { NextResponse } from "next/server"
 
 import { stripe } from "@/lib/stripe"
 import UserSubscription from "@/models/UserSubscription"
+import connectDB from "@/lib/mongodb"
 
 export async function POST(req: Request) {
+
+  // Connect to MongoDB
+  await connectDB();
   const body = await req.text()
   const signature = headers().get("Stripe-Signature") as string
 
