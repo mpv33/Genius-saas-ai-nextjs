@@ -52,7 +52,7 @@ const ConversationPage = () => {
         toast.error("Something went wrong.");
       }
     } finally {
-     // router.refresh();
+      router.refresh();
     }
   }
 

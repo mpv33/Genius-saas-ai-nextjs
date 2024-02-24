@@ -4,8 +4,12 @@ import { NextResponse } from "next/server";
 import UserSubscription from "@/models/UserSubscription";
 import { stripe } from "@/lib/stripe";
 import { absoluteUrl } from "@/lib/utils";
+import connectDB from "@/lib/mongodb";
 
 const settingsUrl = absoluteUrl("/settings");
+
+// Connect to MongoDB
+connectDB();
 
 export async function GET() {
   try {
@@ -16,19 +20,16 @@ export async function GET() {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const userSubscription = await UserSubscription.findUnique({
-      where: {
-        userId
-      }
-    })
+    // Find user subscription by user ID
+    const userSubscription = await UserSubscription.findOne({ userId });
 
     if (userSubscription && userSubscription.stripeCustomerId) {
       const stripeSession = await stripe.billingPortal.sessions.create({
         customer: userSubscription.stripeCustomerId,
         return_url: settingsUrl,
-      })
+      });
 
-      return new NextResponse(JSON.stringify({ url: stripeSession.url }))
+      return new NextResponse(JSON.stringify({ url: stripeSession.url }));
     }
 
     const stripeSession = await stripe.checkout.sessions.create({
@@ -57,11 +58,11 @@ export async function GET() {
       metadata: {
         userId,
       },
-    })
+    });
 
-    return new NextResponse(JSON.stringify({ url: stripeSession.url }))
+    return new NextResponse(JSON.stringify({ url: stripeSession.url }));
   } catch (error) {
     console.log("[STRIPE_ERROR]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
-};
+}
