@@ -8,7 +8,6 @@ import { absoluteUrl } from "@/lib/utils";
 const settingsUrl = absoluteUrl("/settings");
 
 export async function GET() {
-
   try {
     // Ensure user is authenticated and retrieve user info
     const { userId } = auth();
