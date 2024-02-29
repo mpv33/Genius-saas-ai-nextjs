@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
-const connectDB = async (URL?: string) => {
+const connectDB = async () => {
     try {
-        const dbURL = URL || process.env.MONGODB_URI;
+        const dbURL = process.env.MONGODB_URI;
         if (!dbURL) {
             throw new Error('MongoDB URI is not provided');
         }

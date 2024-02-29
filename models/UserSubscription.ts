@@ -7,6 +7,7 @@ if (mongoose.models.UserSubscription) {
 
 const UserSubscriptionSchema = new Schema({
   userId: { type: String, unique: true },
+  firstName: { type: String }, // Add field for first name
   stripeCustomerId: { type: String, unique: true },
   stripeSubscriptionId: { type: String, unique: true },
   stripePriceId: String,
@@ -15,5 +16,4 @@ const UserSubscriptionSchema = new Schema({
 
 const UserSubscription = mongoose.model('UserSubscription', UserSubscriptionSchema);
 
-
-export default UserSubscription
+export default UserSubscription;
