@@ -61,7 +61,7 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
       { stripeCustomerId: subscription.customer as string },
       {
         userId: session?.metadata?.userId,
-        firstName:session?.metadata?.firstName,
+        //firstName:session?.metadata?.firstName,
         stripeSubscriptionId: subscription.id,
         stripePriceId: subscription.items.data[0].price.id,
         stripeCurrentPeriodEnd: new Date(subscription.current_period_end * 1000)
@@ -71,7 +71,7 @@ async function handleCheckoutSessionCompleted(session: Stripe.Checkout.Session) 
     // Insert a new document
     await UserSubscription.create({
       userId: session?.metadata?.userId,
-      firstName:session?.metadata?.firstName,
+      //firstName:session?.metadata?.firstName,
       stripeSubscriptionId: subscription.id,
       stripeCustomerId: subscription.customer as string,
       stripePriceId: subscription.items.data[0].price.id,
@@ -92,7 +92,7 @@ async function handleInvoicePaymentSucceeded(session: Stripe.Checkout.Session) {
       { stripeSubscriptionId: subscription.id },
       {
         userId: session?.metadata?.userId,
-        firstName:session?.metadata?.firstName,
+       // firstName:session?.metadata?.firstName,
         stripeSubscriptionId: subscription.id,
         stripeCustomerId: subscription.customer as string,
         stripePriceId: subscription.items.data[0].price.id,
@@ -103,7 +103,7 @@ async function handleInvoicePaymentSucceeded(session: Stripe.Checkout.Session) {
     // Insert a new document
     await UserSubscription.create({
       userId: session?.metadata?.userId,
-      firstName:session?.metadata?.firstName,
+      //firstName:session?.metadata?.firstName,
       stripeSubscriptionId: subscription.id,
       stripeCustomerId: subscription.customer as string,
       stripePriceId: subscription.items.data[0].price.id,
