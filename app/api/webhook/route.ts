@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   try {
     // Connect to MongoDB
     await connectDB();
-  
+
     const body = await req.text();
     const signature = headers().get("Stripe-Signature") as string;
 
@@ -19,8 +19,8 @@ export async function POST(req: Request) {
     try {
       event = stripe.webhooks.constructEvent(
         body,
-        signature,
-       process.env.STRIPE_WEBHOOK_SECRET!
+        signature ||  process.env.STRIPE_WEBHOOK_SECRET!,
+        process.env.STRIPE_WEBHOOK_SECRET!
       );
     } catch (error: any) {
       console.error("Webhook Error:", error.message);
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     }
 
     const session = event.data.object as Stripe.Checkout.Session;
-    
+
     if (event.type === "checkout.session.completed") {
       await handleCheckoutSessionCompleted(session);
     }
@@ -92,7 +92,7 @@ async function handleInvoicePaymentSucceeded(session: Stripe.Checkout.Session) {
       { stripeSubscriptionId: subscription.id },
       {
         userId: session?.metadata?.userId,
-       // firstName:session?.metadata?.firstName,
+        // firstName:session?.metadata?.firstName,
         stripeSubscriptionId: subscription.id,
         stripeCustomerId: subscription.customer as string,
         stripePriceId: subscription.items.data[0].price.id,
