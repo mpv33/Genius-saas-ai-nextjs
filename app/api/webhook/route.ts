@@ -12,14 +12,14 @@ export async function POST(req: Request) {
     await connectDB();
 
     const body = await req.text();
-  //  const signature = headers().get("Stripe-Signature") as string;
+    const signature = headers().get("Stripe-Signature") as string;
 
     let event: Stripe.Event;
 
     try {
       event = stripe.webhooks.constructEvent(
         body,
-        process.env.STRIPE_WEBHOOK_SECRET_SIGN!,
+        signature,
         process.env.STRIPE_WEBHOOK_SECRET!
       );
     } catch (error: any) {
