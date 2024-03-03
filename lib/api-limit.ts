@@ -9,7 +9,7 @@ export const incrementApiLimit = async () => {
   // await connectDB();
 
   const { userId } = auth();
-  const user = await currentUser(); // Get current user
+ // const user = await currentUser(); // Get current user
 
   if (!userId) {
     return;

@@ -4,7 +4,7 @@
 
 This repository contains the source code for building a SaaS AI Platform with Next.js 13, React, Tailwind CSS, MongoDB, and Stripe. The platform offers various AI-powered tools for generating images, videos, conversations, and music.
 
-## Live : https://genius-openai.vercel.app/
+## Live : https://genius-code.vercel.app/
 ## Features
 
 - Tailwind CSS design with animations and effects
