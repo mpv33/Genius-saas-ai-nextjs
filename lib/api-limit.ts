@@ -4,9 +4,9 @@ import { MAX_FREE_COUNTS } from "@/constants";
 import UserApiLimit from "@/models/UserApiLimit";
 
 
-
+connectDB()
 export const incrementApiLimit = async () => {
-   await connectDB();
+  // await connectDB();
 
   const { userId } = auth();
   const user = await currentUser(); // Get current user
@@ -16,18 +16,18 @@ export const incrementApiLimit = async () => {
   }
   try {
     let userApiLimit = await UserApiLimit.findOne({ userId });
-    if (user) { // Add null check for user
+   // if (user) { // Add null check for user
       if (userApiLimit) {
         userApiLimit.count += 1;
       } else {
         userApiLimit = new UserApiLimit({
-           userId, count: 1,
-           firstName:user?.firstName || ''
+           userId, count: 1
+         //  firstName:user?.firstName || ''
           }); // Include user's first name
       }
 
       await userApiLimit.save();
-    }
+  //  }
   } catch (error) {
     console.error(error);
   }
