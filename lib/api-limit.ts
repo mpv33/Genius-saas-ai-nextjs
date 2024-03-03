@@ -4,8 +4,9 @@ import { MAX_FREE_COUNTS } from "@/constants";
 import UserApiLimit from "@/models/UserApiLimit";
 
 
+
 export const incrementApiLimit = async () => {
-  // await connectDB();
+   await connectDB();
 
   const { userId } = auth();
   const user = await currentUser(); // Get current user
