@@ -14,7 +14,7 @@ const LandingPage = () => {
          href="https://interviewpro.info/"
          target="_blank"
          >
-            Powered by InterviewPro Info Team</a>
+            Powered by InterviewPro Info</a>
       </div>
     </div>
    );

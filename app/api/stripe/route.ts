@@ -55,8 +55,8 @@ export async function GET() {
           },
         ],
         metadata: {
-          userId
-        // firstName: user?.firstName || ''
+          userId,
+         firstName: user?.firstName || ''
         },
       });
     }

@@ -9,8 +9,8 @@ import './globals.css';
 const font = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Genius OpenAI',
-  description: 'Experience the transformative power of Genius OpenAI on our website, where image generation, chat assistance, and code generation converge to unlock unparalleled possibilities.'
+  title: 'Genius',
+  description: 'Explore the power of AI-Conversation,Image Generation,Music Generation,Video Generation,Code Generation'
 };
 
 export default function RootLayout({
@@ -26,8 +26,9 @@ export default function RootLayout({
           <meta charSet="UTF-8" />
           <meta property="og:type" content='website' />
           <meta property="og:url" content='https://genius-openai.vercel.app/' />
-          <meta property="og:title" content='Genius OpenAI' />
-          <meta property="og:description" content='Experience the transformative power of Genius OpenAI on our website, where image generation, chat assistance, and code generation converge to unlock unparalleled possibilities.' />
+          <meta property="og:title" content='Genius' />
+          <meta property="og:description"
+           content='Explore the power of AI-Conversation,Image Generation,Music Generation,Video Generation,Code Generation' />
           <meta property="og:image" content='/preview.png' />
           <meta property="og:image:alt" content='Genius Dashboard' />
         </head>
