@@ -20,7 +20,8 @@ export async function POST(req: Request) {
       event = stripe.webhooks.constructEvent(
         body,
         sigHeader!,
-        process.env.STRIPE_WEBHOOK_SECRET!
+       // process.env.STRIPE_WEBHOOK_SECRET!
+       'whsec_Yk3m6cFZBMx673zbGJ1FTS2NOOzk7rDZ'
       );
     } catch (error: any) {
       console.error("Webhook Error:", error.message);
