@@ -26,6 +26,10 @@ const SettingsPage = async () => {
         </div>
         <SubscriptionButton isPro={isPro} />
       </div>
+      <div className="text-sm text-muted-foreground px-6 pt-12">
+     <span className="text-red-500">* </span>
+      Just Use an Indian Stripe test card India (IN) 4000003560000008 Visa
+      </div>
     </div>
   );
 }
